@@ -1,4 +1,6 @@
-# Start Nuxt TS  
+# movue-it-nuxt
+
+## Start Nuxt TS  
 
 ````
 create-nuxt-app v3.6.0
@@ -18,84 +20,107 @@ create-nuxt-app v3.6.0
 > Git
 ````
 
-## CONFIGURANDO PROJETO
+## Configurando Projeto
 
-+ deletar components/Logo.vue
-+ layout/default.vue
-  + ````
-  + <template>
-  <div>
-    <Nuxt />
-  </div>
-</template>
-  ````
-  + page/index.vue
-  + ````
++ deletar `components/Logo.vue`
++ Em `layout/default.vue`
+````html
+  <template>
+      <div>
+        <Nuxt />
+      </div>
+  </template>
+````
+  + Em `page/index.vue`
+````html
 <template>
-  <div />
+	<div />
 </template>
+````
 
-````
-+ na pasta static: coloca as imagens
-+ Deltar a pasta de test (pois testse vai haver a cada pasta
-+ 
-Em packege.js)
-mudar de
-````
-"lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-````
-para
-
-````
++ na pasta static: coloca as imagens do repo do github
++ Deletar a pasta de test (pois teste vai haver a cada pasta
++ Em `package.json` muda a parte de lint e por os seguintes `tests`
+````json
 // lint no typescript
 "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
-		"test": "jest", // executar text
-		"test:watch": "jest --watchAll", // ficar vigiando (auto reload)
-		"test:coverage": "jest --collectCoverage" //coletar cobertura
+"test": "jest", // executar text
+"test:watch": "jest --watchAll", // ficar vigiando (auto reload)
+"test:coverage": "jest --collectCoverage" //coletar cobertura
 ````
 
-em jest.config.js por:
++ em `jest.config.js` por false para coletar somente quando agente executar aquele comando
+
 ````
-collectCoverage: false
+collectCoverage: false,
+collectCoverageFrom: [
+    '<rootDir>/components/**/*.vue',
+    '<rootDir>/pages/**/*.vue',
+    '<rootDir>/components/**/*.vue',
+    '<rootDir>/pages/**/*.vue',
+    '<rootDir>/layouts/**/*.vue',
+    '<rootDir>/store/**/*.ts',
+    '<rootDir>/utils/**/*.ts',
+    '!<rootDir>/**/types.ts', // acrescentado (nao pegar do types.ts)
+],
 ````
-para coletar somente uqndo agente executar aquele comando
++ Instalar pacotes do `package.json`. São: 
 
-Instalar pacotes
+  + `npm install --save cookie-universal-nuxt @types/jest`
 
-# Cookies no Nuxt || tipos par ao jest || 
-npm install --save cookie-universal-nuxt @types/jest
+  + ```
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    ```
 
+  + Ou você pode clonar do repo mesmo
 
-e tambem (manual) (NA PARTE DE DEV DEPENDENCIS)
-"autoprefixer": "^9",
-"postcss": "^7",
-		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
++ **Configurar ESLINT** COPIA DELE `.eslintrc.js`
++ Criar arquivo `types/vue-shim.d.ts` como do repo
+  + Serve para o VSCode reconhecer melhor os arquivos vue com TS
+  + `The first file helps your IDE to understand what a file ending in .vue is`
 
-CONFIGURAR ESLINT
-+ COPIA DELE
++ **Configurar NUXT**: `nuxt.config.js`
 
-jest.config
-+ pegar o dele (vai incluir mas coisa apra serem vigiadas pelo jest, e tambem, vai excluir types.ts
-+ 
+  + Na parte de 'link' por 3 linhas: novo favicon e 2 linhas para instalar fontes do google
 
-types/vue-shim.d.ts
-+ Serve para o VSCODe reconhecr melhor os arquivos vue com TS
-+ The first file helps your IDE to understand what a file ending in .vue is
+  + ```
+    link: [
+    			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },
+    			{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+    			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap' },
+    		],
+    css: [
+            '~/assets/css/global.css',
+            '~/assets/css/components.css',
+            ],
+    ```
 
-Configurar NUXT
-+ na parte de 'link' por 3 linhas: novo favicon e 2 linhas para instaalr fontes do google
-+ css global da nossa aplicaçâo
-  + criar os srquivos css vaizos
-+ modules:
-  + colcoar o cooki-universal com um alias para fazer this.cookiz ao invez do nome grande completo dele
+  + ```
+    modules: [
+    		['cookie-universal-nuxt', { alias: 'cookiz' }],
+    	],
+    
+    ```
 
-Copy tailwind do repo dele o arquivo tailwind.config
+  + ```
+    tailwindcss: {
+    		// Esse viewr é para gerar um link onde há todas as clases de css geradas pelo tailwind.
+    		// colocamos como false para agilizar o desenvolvimento, mas pode colocar como true para ver as classes criadas
+    		viewer: false,
+    	},
+    ```
 
-configurar ts.config
-+ adicionar @types/jest
+    
 
-em gitignore
-+ adicionar 'coverage'
++ **Configurar Tailwind**: `tailwind.config.js`
+  + copiar do repo dele
++ **Configurar TypeScript**: `ts.config`
+  + adicionar `@types/jest`
+
++ Em .`gitignore`
+  + adicionar 'coverage'
 
 
 

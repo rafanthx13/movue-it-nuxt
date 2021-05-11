@@ -1,5 +1,7 @@
 # movue-it-nuxt
 
+Vue + Nuxt + TailwindCSS + Typescript
+
 From Youtube https://www.youtube.com/watch?v=VbkFOWw4yeY&ab_channel=MaiattoDev
 
 ## Build Setup
