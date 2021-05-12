@@ -1,5 +1,5 @@
 <template>
-	<header class="pb-10 flex items-center">
+	<header class="pb-1 flex items-center">
 		<p class="text-sm">
 			{{ `${xp.start} xp` }}
 		</p>

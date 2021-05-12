@@ -3,7 +3,7 @@ import { State, Getters, Mutations, MutationsInterface } from './types';
 // essas 3 tipagsens serâo usadaas aqui para criar os modulos de estado do CountDown
 // Aqui construireesmos o corpo das coisas do vuex de acordo com a tipagem que definimos
 
-const MINUTES = 25;
+const MINUTES = 0.05; // 0.05 representa 3 segundos; 0.5 = 30s
 
 export const state = (): State => ({
 	time: MINUTES * 60,

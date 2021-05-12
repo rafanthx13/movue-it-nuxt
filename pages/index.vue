@@ -3,8 +3,7 @@
 		<div class="flex flex-col w-full lg:w-1/2">
 			<Profile />
 			<CompletedChallenges />
-			<Countdown @completed="getNewChallenge" /> <!-- Mandar um evento para haver um retorno-->
-			<!-- Botões com condificonais v-if, v-else-if e v-else -->
+			<Countdown @completed="getNewChallenge" />
 			<button
 				v-if="hasCountdownCompleted"
 				disabled
@@ -26,25 +25,29 @@
 			>
 				Start a cycle
 			</button>
-			<!-- <Card id="challenge" class="w-full lg:w-1/2" /> -->
 		</div>
+		<Card id="challenge" class="w-full lg:w-1/2" />
 	</section>
 </template>
 
 <script lang='ts'>
 import Vue from 'vue';
 import { mapState, mapGetters, mapMutations } from 'vuex'; // agora va para uzarmoas as mutations apartir da tiapgemmos usar mapMutations
+
 // Vmaos pegar os tipos das tipagens
 import { Mutations as ChallengesMT } from '~/store/Challenges/types';
 import { Mutations as CountdownMT } from '~/store/Countdown/types';
+
 import CompletedChallenges from '~/components/atoms/CompletedChallenges.vue';
 import Profile from '~/components/molecules/Profile.vue';
 import Countdown from '~/components/molecules/Countdown.vue';
-// import Card from '~/components/organisms/Card.vue';
+import Card from '~/components/organisms/Card.vue';
 
 import {
 	playAudio,
 	sendNotification,
+	getRandomNumber,
+	scrollToElement,
 } from '~/utils';
 
 interface Head {
@@ -64,7 +67,7 @@ export default Vue.extend({
 		CompletedChallenges,
 		Countdown,
 		Profile,
-		// Card,
+		Card,
 	},
 
 	computed: {
@@ -74,6 +77,7 @@ export default Vue.extend({
 			hasCountdownCompleted: 'hasCompleted',
 			isCountdownActive: 'isActive',
 		}),
+		// mapear estado de Challges e pegar apenas o challengesLength
 		...mapGetters('Challenges', ['challengesLength']),
 	},
 
@@ -100,7 +104,9 @@ export default Vue.extend({
 
 		// FunçÂo que fará um callback de CountDown para esse componente
 		getNewChallenge () {
+			const index = getRandomNumber(0, this.challengesLength);
 			this.setCountdownHasCompleted(true);
+			this.setCurrentChallengeIndex(index);
 			if (Notification?.permission === 'granted') {
 				playAudio('/notification.mp3'); // tocar o áudio. ele vai buscar direto na pasta static
 				sendNotification('New Challenge!', {
@@ -108,6 +114,13 @@ export default Vue.extend({
 					icon: '/favicon.png',
 				});
 			}
+			// nextTick: Depois que meu challenge aparecer, no mobile, agente vai te rum scroll para subir
+			/*
+			Defer the callback to be executed after the next DOM update cycle. Use it immediately after you’ve changed some data to wait for the DOM update.
+			*/
+			this.$nextTick(() => {
+				scrollToElement('#challenge');
+			});
 		},
 
 	},
