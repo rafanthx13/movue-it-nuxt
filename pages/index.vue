@@ -31,6 +31,7 @@
 </template>
 
 <script lang='ts'>
+
 import Vue from 'vue';
 import { mapState, mapGetters, mapMutations } from 'vuex'; // agora va para uzarmoas as mutations apartir da tiapgemmos usar mapMutations
 
@@ -44,10 +45,10 @@ import Countdown from '~/components/molecules/Countdown.vue';
 import Card from '~/components/organisms/Card.vue';
 
 import {
+	scrollToElement,
+	getRandomNumber,
 	playAudio,
 	sendNotification,
-	getRandomNumber,
-	scrollToElement,
 } from '~/utils';
 
 interface Head {
@@ -70,6 +71,13 @@ export default Vue.extend({
 		Card,
 	},
 
+	// Pedir permissão par aque meu browser possa emitir notificações
+	mounted () {
+		if ('Notification' in window) {
+			Notification.requestPermission();
+		}
+	},
+
 	computed: {
 		// Mapear um estado de CountDown para uma variável interna. Para termos uma semântica melhor
 		// Para isso mapeamos através de um objeto
@@ -82,9 +90,10 @@ export default Vue.extend({
 	},
 
 	methods: {
+
 		// Mapeando mutações
 		...mapMutations({
-			// Perba: Graças a tipagem, eu posso mudar nomes dos métodos apenas mudando a tring da tipagem
+			// Perceba: Graças a tipagem, eu posso mudar nomes dos métodos apenas mudando a tring da tipagem
 			setCountdownHasCompleted: `Countdown/${CountdownMT.SET_HAS_COMPLETED}`,
 			setCountdownIsActive: `Countdown/${CountdownMT.SET_IS_ACTIVE}`,
 			setCurrentChallengeIndex: `Challenges/${ChallengesMT.SET_CURRENT_CHALLENGE_INDEX}`,
@@ -95,14 +104,7 @@ export default Vue.extend({
 			this.setCountdownIsActive(flag);
 		},
 
-		// Pedir permissão par aque meu browser possa emitir notificações
-		mounted () {
-			if ('Notification' in window) {
-				Notification.requestPermission();
-			}
-		},
-
-		// FunçÂo que fará um callback de CountDown para esse componente
+		// Função que fará um callback de CountDown para esse componente
 		getNewChallenge () {
 			const index = getRandomNumber(0, this.challengesLength);
 			this.setCountdownHasCompleted(true);
@@ -122,8 +124,6 @@ export default Vue.extend({
 				scrollToElement('#challenge');
 			});
 		},
-
 	},
-
 });
 </script>

@@ -1,8 +1,12 @@
-# movue-it-nuxt
+# Movue It (Nuxt/TS/Tailwind)
 
 Vue + Nuxt + TailwindCSS + Typescript
 
-From Youtube https://www.youtube.com/watch?v=VbkFOWw4yeY&ab_channel=MaiattoDev
+Baseado no Youtube: https://www.youtube.com/watch?v=VbkFOWw4yeY&ab_channel=MaiattoDev
+
+Git: https://github.com/rafaelmaiach/movue-it-nuxt
+
+Web App: https://my-nuxt-movue-it.vercel.app/
 
 ## Build Setup
 
