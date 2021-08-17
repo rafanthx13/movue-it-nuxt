@@ -51,6 +51,8 @@ NO DIRETÓRIO DIGITO
 
 `vercel`
 
+faça o login corretamente. e repsonda como abaixo
+
 ````
  > vercel
 Vercel CLI 22.0.1
@@ -59,7 +61,9 @@ Vercel CLI 22.0.1
 ? Link to existing project? [y/N] n
 ? What’s your project’s name? my-nuxt-movue-it 
 ````
-O nome tem que ser único entre todos do mundo
+OBS: O nome tem que ser único entre todos do mundo
+
+Se quiser subir uma nova verçâo rode `vercel --prod`
 
 ## Git Diff
 

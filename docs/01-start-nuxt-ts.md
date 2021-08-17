@@ -2,6 +2,8 @@
 
 ## Start Nuxt TS  
 
+$ npx create-nuxt-app example10-workstation-nuxt
+
 ````
 create-nuxt-app v3.6.0
 ✨  Generating Nuxt.js project in movue-it-nuxt
@@ -14,7 +16,7 @@ create-nuxt-app v3.6.0
 ? Testing framework: Jest
 ? Rendering mode: Universal (SSR / SSG)
 ? Deployment target: Server (Node.js hosting)
-? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
+? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection) NONE
 ? Continuous integration: None
 ? Version control system: (Use arrow keys)
 > Git
